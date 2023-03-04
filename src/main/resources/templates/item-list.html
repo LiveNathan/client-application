@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" layout:decorate="~{fragments/layout}">
 <head>
     <meta charset="UTF-8">
     <title>Items for Sale</title>
@@ -8,26 +8,29 @@
 </head>
 <body>
 <div class="container">
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">Item Id</th>
-            <th scope="col">Name</th>
-            <th scope="col">Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:if="${items.empty}">
-            <td>0</td>
-        </tr>
-        <tr th:each="item : ${items}">
-            <th scope="row" th:text="${item.id}"></th>
-            <td th:text="${item.name}"></td>
-            <td th:text="${item.description}"></td>
-            <td><a th:href="@{/cart/userId}" class="btn btn-primary">Add</a></td>
-        </tr>
-        </tbody>
-    </table>
+    <div layout:fragment="content" th:remove="tag">
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Item Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${items.empty}">
+                <td>0</td>
+            </tr>
+            <tr th:each="item : ${items}">
+                <th scope="row" th:text="${item.id}"></th>
+                <td th:text="${item.name}"></td>
+                <td th:text="${item.description}"></td>
+                <td><a th:href="@{/cart/userId}" class="btn btn-primary">Add</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 </body>
 </html>

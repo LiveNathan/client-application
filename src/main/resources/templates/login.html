@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" layout:decorate="~{fragments/layout}">
+<head>
+    <title>Log In</title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <div align="center">
+        <h1>Log In</h1>
+        <br/>
+        <p th:if="${loginError}" class="error">Wrong user or password</p>
+        <form th:action="@{/login.html}" method="post">
+            <label for="username">Username</label>:
+            <input type="text" id="username" name="username" autofocus="autofocus"/> <br/>
+            <label for="password">Password</label>:
+            <input type="password" id="password" name="password"/> <br/>
+            <input type="submit" value="Log in"/>
+            <br/>
+            <p>New user? <a th:href="@{/register}">Register here</a></p>
+        </form>
+    </div>
+</div>
+</body>
+</html>
