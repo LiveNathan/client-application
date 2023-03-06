@@ -24,7 +24,10 @@ public class SecurityConfig {
 //                        .anyRequest().hasRole("ADMIN"))
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
-                .formLogin(login -> login.loginPage("/login").permitAll());
+                .formLogin(login -> login
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/items")
+                        .permitAll());
         return http.build();
     }
 
