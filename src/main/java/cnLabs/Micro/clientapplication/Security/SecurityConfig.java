@@ -1,10 +1,14 @@
 package cnLabs.Micro.clientapplication.Security;
 
+import cnLabs.Micro.clientapplication.Service.MyUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -20,10 +24,8 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeRequests(auth -> auth
                         .antMatchers("/js/**", "/css/**", "/fragments/**", "/img/**", "/webjars/**", "/error/**", "/images/**", "/register/**", "/", "/index").permitAll()
-//                        .antMatchers("/customer-view").hasRole("USER")
-//                        .anyRequest().hasRole("ADMIN"))
                         .anyRequest().authenticated())
-                .httpBasic(Customizer.withDefaults())
+//                        .anyRequest().permitAll())
                 .formLogin(login -> login
                         .loginPage("/login")
                         .defaultSuccessUrl("/items")
@@ -35,4 +37,5 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 }
