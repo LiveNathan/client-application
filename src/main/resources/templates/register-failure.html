@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" layout:decorate="~{fragments/layout}">
+<head>
+    <title>Registration Success</title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <div align="center">
+        <h1>Registration Success!</h1>
+        <br/>
+        <p><a th:href="@{/login}">Please log in.</a></p>
+        <br/>
+        <p>Confirming the details you entered:</p>
+        <p>Username: <span th:text="${user.username}"></span></p>
+        <p>Name: <span th:text="${user.fullName}"></span></p>
+        <p>Email: <span th:text="${user.email}"></span></p>
+    </div>
+</div>
+</body>
+</html>
