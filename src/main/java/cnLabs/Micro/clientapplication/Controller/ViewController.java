@@ -81,8 +81,22 @@ public class ViewController {
             model.addAttribute("user", user);
             return "/register";
         }
-        myUserDetailsService.registerUser(user);
-        return "redirect:/items";
+        User userResponse = myUserDetailsService.registerUser(user);
+        if (userResponse == null) {
+            return "redirect:/register-failure";
+        }
+        model.addAttribute("user", userResponse);
+        return "redirect:/register-success";
+    }
+
+    @GetMapping("/register-failure")
+    public String showRegisterFailurePage(Model model) {
+        return "register-failure";
+    }
+
+    @GetMapping("/register-success")
+    public String showRegisterSuccessPage(Model model) {
+        return "register-success";
     }
 
     @GetMapping("/login")
@@ -101,12 +115,45 @@ public class ViewController {
         }
     }
 
+    @PostMapping("/cart2")
+    public String addNewCartItem2(@RequestParam Long itemId, Authentication authentication) {
+        CustomUserDetails user = (CustomUserDetails) authentication.getPrincipal();
+        try {
+            cartServiceClient.addCartItem(itemId, user.getId());
+            return "redirect:/cart";
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Not Found", e);
+        }
+    }
+
     @PostMapping("/cart/remove")
     public String removeCartItem(@RequestParam Long itemId, Authentication authentication) {
         CustomUserDetails user = (CustomUserDetails) authentication.getPrincipal();
         try {
             cartServiceClient.removeCartItem(itemId, user.getId());
             return "redirect:/items";
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Not Found", e);
+        }
+    }
+
+    @PostMapping("/cart/remove2")
+    public String removeCartItem2(@RequestParam Long itemId, Authentication authentication) {
+        CustomUserDetails user = (CustomUserDetails) authentication.getPrincipal();
+        try {
+            cartServiceClient.removeCartItem(itemId, user.getId());
+            return "redirect:/cart";
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Not Found", e);
+        }
+    }
+
+    @PostMapping("/cart/remove-all")
+    public String removeCartItemAll(@RequestParam Long itemId, Authentication authentication) {
+        CustomUserDetails user = (CustomUserDetails) authentication.getPrincipal();
+        try {
+            cartServiceClient.removeCartItemCompletely(itemId, user.getId());
+            return "redirect:/cart";
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Not Found", e);
         }

@@ -42,9 +42,10 @@ public class MyUserDetailsService implements UserDetailsService {
         }
     }
 
-    public void registerUser(User user) {
+    public User registerUser(User user) {
         user.setPassword(encoder.encode(user.getPassword()));
         User userResponse = userDetailsClient.registerUser(user);
+        return userResponse;
     }
 
 }

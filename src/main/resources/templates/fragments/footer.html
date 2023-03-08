@@ -9,7 +9,7 @@
 
             <p>
                 <span sec:authorize="isAuthenticated()">
-                Logged in user: <span sec:authentication="name">Bob</span>
+                Logged in user: <span sec:authentication="name">Bob</span> with roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
                 <a th:if="${#httpServletRequest.remoteUser !=null}" th:href="@{/logout}"> - Log Out</a>
                 </span>
         </div>
