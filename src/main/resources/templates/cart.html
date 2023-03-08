@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" layout:decorate="~{fragments/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <h1 th:text="${#lists.isEmpty(itemsInCartList)}? 'Empty cart' : 'Cart'">Cart</h1>
+    <table th:if="!${#lists.isEmpty(itemsInCartList)}" class="table">
+        <thead>
+        <tr>
+            <th scope="col">Item Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Quantity in cart</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${itemsInCartList}">
+            <th scope="row" th:text="${item.itemId}"></th>
+            <td th:text="${itemsMap.get(item.itemId)}"></td>
+            <td th:text="${item.amount}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <!--    </div>-->
+</div>
+</body>
+</html>
