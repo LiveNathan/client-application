@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" layout:decorate="~{fragments/layout}">
+<head>
+    <title>Registration Failure</title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <div align="center">
+        <h1>Registration failed</h1>
+        <br/>
+        <p><a th:href="@{/register}">Please try again.</a></p>
+    </div>
+</div>
+</body>
+</html>

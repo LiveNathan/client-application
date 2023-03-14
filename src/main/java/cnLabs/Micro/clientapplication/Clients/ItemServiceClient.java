@@ -1,4 +1,4 @@
-package cnLabs.Micro.clientapplication.Service;
+package cnLabs.Micro.clientapplication.Clients;
 
 import cnLabs.Micro.clientapplication.Model.Item;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class ItemService {
+public class ItemServiceClient {
 
     @Autowired
     @LoadBalanced
